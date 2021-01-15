@@ -29,7 +29,7 @@
                         </div>
                         <br>
                         <div class="form-group d-flex justify-content-center">
-                            <button class="btn btn-primary w-25" id="login">Register</button>
+                            <button class="btn btn-primary w-25" id="login"><a v-bind:href="vuelink"></a>Register</button>
                         </div>
                     </form>
                 </div>
@@ -41,6 +41,11 @@
 <script>
 
 export default {
+  data () {
+    return {
+      vuelink: '../login'
+    }
+  }
 }
 </script>
 
