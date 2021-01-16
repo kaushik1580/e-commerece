@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label class="input-label">Phone Number</label>
-                            <input type="long" class="form-control" placeholder="Phone Number" name="mobileNumber" v-model="posts.mobileNumber">
+                            <input type="number" class="form-control" placeholder="Phone Number" name="mobileNumber" v-model="posts.mobileNumber">
                         </div>
                         <div class="form-group">
                             <label class="input-label">Gender</label>
@@ -48,21 +48,21 @@ export default {
     return {
       vuelink: '../login',
       posts: {
-        userName: '',
-        email: '',
-        password: '',
-        mobileNumber: 0,
-        gender: ''
+        userName: null,
+        email: null,
+        password: null,
+        mobileNumber: null,
+        gender: null
       }
     }
   },
   methods: {
     postData (e) {
-      this.axios.post('http://10.177.1.51:8083/users/save', this.posts)
-        .this((result) => {
-          console.warn(this.posts)
-        })
       e.preventDefault()
+      this.axios.post('http://10.177.1.51:8083/users/save', this.posts)
+        .then((result) => {
+          console.warn(this.posts)
+        }).catch(error => console.log(error))
     }
   }
 }

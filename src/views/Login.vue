@@ -6,18 +6,18 @@
                     <h2 class="display-3 font-weight-bold">Login</h2>
                     <p class="font-weight-bold">Welcome back</p>
                     <br>
-                    <form action="" @submit="postData" method="post">
+                    <form action="" @submit="getData" method="post">
                         <div class="form-group">
                             <label class="input-label">Email</label>
-                            <input type="email" class="form-control" placeholder="Email" name="author" v-model="posts.author">
+                            <input type="email" class="form-control" placeholder="Email" name="email" v-model="gets.email">
                         </div>
                         <div class="form-group">
                             <label class="input-label">Password</label>
-                            <input type="password" class="form-control" placeholder="Password" name="title" v-model="posts.title">
+                            <input type="password" class="form-control" placeholder="Password" name="password" v-model="gets.password">
                         </div>
                         <br>
                         <div class="form-group d-flex justify-content-center">
-                            <button class="btn btn-primary w-25" id="login" type="submit">Login</button>
+                            <button class="btn btn-primary w-25" id="login" type="submit" @click="getData">Login</button>
                         </div>
                     </form>
                     <div class="form-group d-flex justify-content-center">
@@ -39,19 +39,20 @@ export default {
   name: 'Login',
   data () {
     return {
-      posts: {
-        title: null,
-        author: null
-      }
+      gets: {
+        email: '',
+        password: ''
+      },
+      url: 'http://10.177.1.51:8083/users/find/'
     }
   },
   methods: {
-    postData (e) {
-      this.axios.get('http://10.177.1.83:9090/users/save', this.posts)
-        .this((result) => {
-          console.warn(this.posts)
-        })
+    getData (e) {
       e.preventDefault()
+      this.axios.get(`${this.url}/${this.gets.email}/${this.gets.password}`, this.gets)
+        .then((result) => {
+          console.warn(this.gets)
+        }).catch(error => console.log(error))
     }
   }
 }
